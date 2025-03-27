@@ -1,5 +1,6 @@
 package com.example.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,11 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "article_id", nullable = false)
+    @JsonIgnore
+    @JoinColumn(
+            name = "article_id",
+            nullable = false,
+            foreignKey = @ForeignKey(foreignKeyDefinition = "FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE")
+    )
     private Article article;
 }

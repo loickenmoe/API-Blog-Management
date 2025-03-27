@@ -1,5 +1,7 @@
 package com.example.blog.service;
 
+import com.example.blog.dto.ArticleDto;
+import com.example.blog.mapper.ArticleMapper;
 import com.example.blog.model.Article;
 import com.example.blog.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +24,11 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
-    public Article createArticle(Article article) {
-        article.setPublishedAt(LocalDateTime.now());
-        return articleRepository.save(article);
+    public Article createArticle(ArticleDto article) {
+        return articleRepository.save(ArticleMapper.toEntity(article));
     }
 
-    public Article updateArticle(Long id, Article updatedArticle) {
+    public Article updateArticle(Long id, ArticleDto updatedArticle) {
         return articleRepository.findById(id).map(article -> {
             article.setTitle(updatedArticle.getTitle());
             article.setContent(updatedArticle.getContent());

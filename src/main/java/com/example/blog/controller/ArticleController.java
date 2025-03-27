@@ -1,5 +1,6 @@
 package com.example.blog.controller;
 
+import com.example.blog.dto.ArticleDto;
 import com.example.blog.model.Article;
 import com.example.blog.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +26,12 @@ public class ArticleController {
     }
 
     @PostMapping
-    public Article createArticle(@RequestBody Article article) {
+    public Article createArticle(@RequestBody ArticleDto article) {
         return articleService.createArticle(article);
     }
 
     @PutMapping("/{id}")
-    public Article updateArticle(@PathVariable Long id, @RequestBody Article article) {
+    public Article updateArticle(@PathVariable Long id, @RequestBody ArticleDto article) {
         return articleService.updateArticle(id, article);
     }
 
